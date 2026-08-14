@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinanceAI - Premium Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  
+  <div class="container">
+    <header class="glass-card header-bar">
+      <div class="logo-section">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00d2ff" />
+              <stop offset="1" stop-color="#7b2ff7" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="title-group">
+          <h1>FinanceAI</h1>
+          <p>AI-Powered Personal Finance Dashboard</p>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <div class="pulse-dot" id="system-status-dot"></div>
+        <span id="system-status-text">Connecting...</span>
+      </div>
+    </header>
+
+    <!-- Section 1: Summary Cards -->
+    <section class="summary-grid" id="summary-section">
+      <div class="glass-card summary-card">
+        <div class="card-header">
+          <span class="card-icon income-icon">↑</span>
+          <span class="card-label">Monthly Income</span>
+        </div>
+        <div class="card-value" id="val-income">₹0</div>
+        <div class="card-trend text-green">+5.2% vs last month</div>
+      </div>
+      <div class="glass-card summary-card">
+        <div class="card-header">
+          <span class="card-icon expense-icon">↓</span>
+          <span class="card-label">Monthly Expenses</span>
+        </div>
+        <div class="card-value" id="val-expenses">₹0</div>
+        <div class="card-trend text-coral">-1.4% vs last month</div>
+      </div>
+      <div class="glass-card summary-card">
+        <div class="card-header">
+          <span class="card-icon savings-icon">₹</span>
+          <span class="card-label">Net Savings</span>
+        </div>
+        <div class="card-value" id="val-savings">₹0</div>
+        <div class="card-trend text-cyan">+12.1% vs last month</div>
+      </div>
+      <div class="glass-card summary-card">
+        <div class="card-header">
+          <span class="card-icon rate-icon">%</span>
+          <span class="card-label">Savings Rate</span>
+        </div>
+        <div class="card-value" id="val-rate">0%</div>
+        <div class="card-trend text-purple">Target: 30%</div>
+      </div>
+    </section>
+
+    <!-- Section 2: Main Charts -->
+    <section class="charts-row">
+      <div class="glass-card chart-container span-60">
+        <h2>Expense Forecast</h2>
+        <div class="chart-wrapper">
+          <canvas id="expenseForecastChart"></canvas>
+        </div>
+      </div>
+      <div class="glass-card chart-container span-40">
+        <h2>Category Breakdown</h2>
+        <div class="chart-wrapper">
+          <canvas id="categoryDonutChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Budget Analysis -->
+    <section class="charts-row">
+      <div class="glass-card chart-container span-50">
+        <h2>Income vs Expenses</h2>
+        <div class="chart-wrapper">
+          <canvas id="incomeExpenseChart"></canvas>
+        </div>
+      </div>
+      <div class="glass-card chart-container span-50">
+        <h2>Savings Projection</h2>
+        <div class="chart-wrapper">
+          <canvas id="savingsProjectionChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: AI Recommendations -->
+    <section class="glass-card section-container">
+      <h2>🤖 AI Budget Optimization Recommendations</h2>
+      <div class="recommendations-grid" id="recommendations-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- Section 5: Savings Goal Tracker -->
+    <section class="glass-card section-container">
+      <h2>🎯 Savings Goal Tracker</h2>
+      <div class="goal-tracker-container">
+        <div class="goal-inputs">
+          <div class="input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="goal-target" placeholder="e.g. 500000" value="500000">
+          </div>
+          <div class="input-group">
+            <label>Timeline (Months)</label>
+            <input type="number" id="goal-timeline" placeholder="e.g. 12" value="12">
+          </div>
+          <div class="input-group">
+            <label>Current Savings (₹)</label>
+            <input type="number" id="goal-current" placeholder="e.g. 150000" value="150000">
+          </div>
+          <button class="btn-primary" id="btn-analyze-goal">Analyze Goal</button>
+        </div>
+        <div class="goal-results" id="goal-results" style="display:none;">
+          <div class="goal-header">
+            <span class="feasibility-badge" id="goal-feasibility">Achievable</span>
+            <span class="monthly-required">Required: <strong id="goal-monthly">₹0</strong> /mo</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="goal-progress-fill"></div>
+          </div>
+          <div class="progress-labels">
+            <span id="goal-current-label">₹0</span>
+            <span id="goal-target-label">₹0</span>
+          </div>
+          <p class="goal-message" id="goal-message">Based on current trajectory, you will reach this goal on time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Quick Actions -->
+    <section class="glass-card quick-actions">
+      <button class="btn-secondary" id="btn-generate">Generate Data</button>
+      <button class="btn-secondary" id="btn-train">Train Models</button>
+      <button class="btn-outline" id="btn-refresh">Refresh Dashboard</button>
+    </section>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
