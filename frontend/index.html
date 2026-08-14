@@ -159,7 +159,48 @@
 
   <div id="toast-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js with CDN and fallback -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    // Fallback if Chart.js doesn't load
+    if (typeof Chart === 'undefined') {
+      console.warn('Chart.js not loaded. Installing fallback...');
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js';
+      script.onload = function() {
+        console.log('Chart.js loaded from alternate CDN');
+        loadScripts();
+      };
+      script.onerror = function() {
+        console.error('Chart.js failed to load from both CDNs');
+        showChartError();
+      };
+      document.head.appendChild(script);
+    } else {
+      loadScripts();
+    }
+    
+    function loadScripts() {
+      const scripts = ['utils.js', 'api.js', 'charts.js', 'app.js'];
+      let loaded = 0;
+      scripts.forEach(script => {
+        const s = document.createElement('script');
+        s.src = 'js/' + script;
+        s.onload = () => { loaded++; };
+        s.onerror = () => { console.error('Failed to load ' + script); };
+        document.body.appendChild(s);
+      });
+    }
+    
+    function showChartError() {
+      document.addEventListener('DOMContentLoaded', () => {
+        const containers = document.querySelectorAll('.chart-container');
+        containers.forEach(container => {
+          container.innerHTML = '<p style="padding: 20px; color: #ff9800;">Charts unavailable. Displaying data in list format below.</p>' + container.innerHTML;
+        });
+      });
+    }
+  </script>
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/charts.js"></script>

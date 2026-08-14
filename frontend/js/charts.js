@@ -1,12 +1,29 @@
-Chart.defaults.color = '#9fa8da';
-Chart.defaults.font.family = 'Inter';
+// Check if Chart.js is loaded
+if (typeof Chart === 'undefined') {
+  console.warn('Chart.js not available. Charts will be skipped.');
+  const initExpenseForecastChart = () => console.warn('Chart.js not loaded');
+  const initCategoryDonutChart = () => console.warn('Chart.js not loaded');
+  const initIncomeExpenseChart = () => console.warn('Chart.js not loaded');
+  const initSavingsProjectionChart = () => console.warn('Chart.js not loaded');
+} else {
+  Chart.defaults.color = '#9fa8da';
+  Chart.defaults.font.family = 'Inter';
+}
 
 const darkGrid = 'rgba(255,255,255,0.05)';
 
 let expenseChart, donutChart, incomeExpenseChart, savingsChart;
 
 const initExpenseForecastChart = (canvasId, histData, predData) => {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (typeof Chart === 'undefined') {
+    document.getElementById(canvasId).parentElement.innerHTML = '<p style="color: #ffc107; padding: 20px;">Chart unavailable</p>';
+    return;
+  }
+  
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
   
   if (expenseChart) expenseChart.destroy();
 
@@ -75,7 +92,15 @@ const initExpenseForecastChart = (canvasId, histData, predData) => {
 };
 
 const initCategoryDonutChart = (canvasId, data) => {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (typeof Chart === 'undefined') {
+    document.getElementById(canvasId).parentElement.innerHTML = '<p style="color: #ffc107; padding: 20px;">Chart unavailable</p>';
+    return;
+  }
+  
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
   
   if (donutChart) donutChart.destroy();
 
@@ -136,7 +161,15 @@ const initCategoryDonutChart = (canvasId, data) => {
 };
 
 const initIncomeExpenseChart = (canvasId, data) => {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (typeof Chart === 'undefined') {
+    document.getElementById(canvasId).parentElement.innerHTML = '<p style="color: #ffc107; padding: 20px;">Chart unavailable</p>';
+    return;
+  }
+  
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
   
   if (incomeExpenseChart) incomeExpenseChart.destroy();
 
@@ -182,7 +215,15 @@ const initIncomeExpenseChart = (canvasId, data) => {
 };
 
 const initSavingsProjectionChart = (canvasId, data) => {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (typeof Chart === 'undefined') {
+    document.getElementById(canvasId).parentElement.innerHTML = '<p style="color: #ffc107; padding: 20px;">Chart unavailable</p>';
+    return;
+  }
+  
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
   
   if (savingsChart) savingsChart.destroy();
 
