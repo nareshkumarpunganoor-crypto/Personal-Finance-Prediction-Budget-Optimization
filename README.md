@@ -9,7 +9,21 @@ An intelligent, full-stack personal finance forecasting and budget allocation sy
 
 ---
 
-## 📌 Project Overview
+## � Quick Access
+
+**Live Dashboard:** [http://localhost:8080](http://localhost:8080)
+
+To launch the dashboard locally:
+```powershell
+cd frontend
+python -m http.server 8080
+```
+
+Then open **http://localhost:8080** in your browser.
+
+---
+
+## �📌 Project Overview
 
 Managing personal finances, tracking variable monthly cash flows, and avoiding lifestyle inflation are persistent challenges for individuals. Traditional budgeting applications are predominantly retrospective—they record where money has already gone rather than forecasting future liquidity constraints.
 
@@ -180,12 +194,35 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 - Redoc Documentation: `http://127.0.0.1:8000/redoc`
 
 ### 7. Launch Frontend Dashboard
-Open the frontend application in your browser:
+
+#### Option A: Using Python's Built-in Web Server (Recommended)
+Navigate to the frontend directory and start a local web server:
 ```powershell
-# Open directly in default browser:
-start ../frontend/index.html
-# Or serve using any lightweight static file server
+cd frontend
+python -m http.server 8080
 ```
+
+Then open your browser and go to:
+```
+http://localhost:8080
+```
+
+✅ **Features available at localhost:8080:**
+- 📊 Dashboard with Income, Expenses, and Savings summary
+- 📈 Financial trends visualization with 12-month historical data
+- 🎯 Category breakdown analysis
+- 💰 AI-powered budget optimization recommendations
+- 🔮 3-month expense forecasting
+- ⚙️ Savings goal analysis tool
+- 🌙 Dark/Light theme toggle
+
+#### Option B: Direct Browser Open
+```powershell
+# Open directly in default browser (file:// protocol - may have issues):
+start ../frontend/index.html
+```
+
+**Note:** Using the file:// protocol may cause resource loading issues. The web server method (Option A) is recommended for full functionality.
 
 ---
 
