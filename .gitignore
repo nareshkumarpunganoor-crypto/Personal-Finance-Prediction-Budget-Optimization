@@ -1,11 +1,7 @@
-.venv/
+backend/data/
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.pytest_cache/
-.ipynb_checkpoints/
-.DS_Store
+*.pyc
 .env
-.vscode/
-*.log
+*.pkl
+.venv/
+*.db
