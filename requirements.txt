@@ -1,7 +1,8 @@
-flask
-flask-cors
+fastapi
+uvicorn
 numpy
 pandas
 scikit-learn
 joblib
-gunicorn
+python-multipart
+httpx
